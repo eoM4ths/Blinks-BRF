@@ -1,5 +1,4 @@
-/*Enrichments*/
-  Publisher: //Define nossos principais publishers de acordo com a origem mídia da sessão
+Publisher - Define o publisher da campanha de acordo com a origem / mídia da sessão:
     {cur['ga:sourceMedium']}.split(" / ")[0]  if {cur['Canal']} == 'display2' 
     else 'google' if ({cur['ga:sourceMedium']} == 'google / cpc') 
     else 'bing ads' if ({cur['ga:sourceMedium']} == 'bing / cpc') 
@@ -8,38 +7,50 @@
     else '-'
     Código completo para o Adverity:
       {cur['ga:sourceMedium']}.split(" / ")[0] if {cur['Canal']} == 'display2' else 'google' if ({cur['ga:sourceMedium']} == 'google / cpc') else 'bing ads' if ({cur['ga:sourceMedium']} == 'bing / cpc') else 'crm' if ({cur['Canal']} == 'crm') else {cur['ga:sourceMedium']}.split(" / ")[0] if ({cur['Canal']} == 'social') else '-'
-    
-  Campanha: //Define o nome das campanhas de acordo com o veículo
+
+Campanha - Define o nome da campanha de acordo com a nomenclatura:
     {cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 5 
-    else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 5 else 
-      'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] 
+    else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 5 
+    else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] 
     else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] 
     else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 3 
     else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'search' and len(cur['ga:campaign'].split("_")) >= 4 
     else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 5 
-    else cur['ga:campaign'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'crm' and len(cur['ga:campaign'].split("_")) >= 4 else '-'}
-    //Define o nome da campanha de acordo com a dimensão 'ga:campaign', observe que temos alguns requisitos no split que verifica se há "_" na string da campanha
-      e também verifica quantos "_" há na dimensão, assim evitamos erros no enrichment caso haja nomenclaturas erradas.
+    else cur['ga:campaign'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'crm' and len(cur['ga:campaign'].split("_")) >= 4 
+    else '-'}
+    //Neste enrichment temos algumas etapas de verificação: se há o caractere '_' dentro da dimensão e também se há a quantidade necessária deste mesmo caractere para
+    que não haja erros no enrichment.
+    Códido completo para o Adverity:
+    {cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 5 else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 5 else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 3 else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'search' and len(cur['ga:campaign'].split("_")) >= 4 else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 5 else cur['ga:campaign'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'crm' and len(cur['ga:campaign'].split("_")) >= 4 else '-'}
+
+Objetivo - Define o objetivo da campanha de acordo com a nomenclatura:
+    (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 3 
+    else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 3 
+    else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] 
+    else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] 
+    else cur['ga:campaign'].split("_")[5] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 6 
+    else (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 3 else '-') if "_" in cur['ga:campaign'] 
+    else '-')
+    //Este enrichment usa a mesma lógica do anterior.
     Código completo para o Adverity:
-     {cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 5 else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 5 else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 3 else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'search' and len(cur['ga:campaign'].split("_")) >= 4 else cur['ga:campaign'].split("_")[4] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 5 else cur['ga:campaign'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'crm' and len(cur['ga:campaign'].split("_")) >= 4 else '-'}
-     
-  Objetivo - Define o objetivo da campanha de acordo com a nomenclatura:
-     (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 3 
-     else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 3 
-     else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] 
-     else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] 
-     else cur['ga:campaign'].split("_")[5] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 6 
-     else (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 3 
-     else '-') if "_" in cur['ga:campaign'] else '-')
-     Código completo para o Adverity:
-     (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 3 else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 3 else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] else cur['ga:campaign'].split("_")[5] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 6 else (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 3 else '-') if "_" in cur['ga:campaign'] else '-')
-     //Este enrichment utiliza a mesma lógica do anterior.
- 
-  Dimensão - Define a dimensão do criativo se o veículo for Display:
+    (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:campaign'].split("_")) >= 3 else cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:campaign'].split("_")) >= 3 else 'brand' if cur['Canal'] == 'search' and 'BRAND' in cur['ga:campaign'] else 'generico' if cur['Canal'] == 'search' and 'GENERIC' in cur['ga:campaign'] else cur['ga:campaign'].split("_")[5] if "_" in cur['ga:campaign'] and cur['Canal'] == 'social' and len(cur['ga:campaign'].split("_")) >= 6 else (cur['ga:campaign'].split("_")[2] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:campaign'].split("_")) >= 3 else '-') if "_" in cur['ga:campaign'] else '-')
+
+Dimensão - Define a dimensão do criativo se o veículo for display:
+    cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:keyword'].split("_")) >= 2 
+    else cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:keyword'].split("_")) >= 2 else '-'
+
+Formato - Define o formato do criativo baseado na nomenclatura (somente display):
     cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:keyword'].split("_")) >= 2 
     else cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:keyword'].split("_")) >= 2 
     else '-'
     Código completo para o Adverity:
-      cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:keyword'].split("_")) >= 2 else cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:keyword'].split("_")) >= 2 else '-'
-     
+       cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:keyword'].split("_")) >= 2 else cur['ga:keyword'].split("_")[0] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:keyword'].split("_")) >= 2 else '-'
+
+Duração - Define a duração do criativo baseado na nomenclatura (somente display):
+    cur['ga:keyword'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display' and len(cur['ga:keyword'].split("_")) >= 3 
+    else cur['ga:keyword'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'display2' and len(cur['ga:keyword'].split("_")) >= 3 
+    else cur['ga:keyword'].split("_")[3] if "_" in cur['ga:campaign'] and cur['Canal'] == 'video' and len(cur['ga:keyword'].split("_")) >= 3 
+    else 0
+
+    
     
