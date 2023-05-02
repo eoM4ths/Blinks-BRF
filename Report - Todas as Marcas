@@ -1,0 +1,39 @@
+Páginas - Define o tipo de página de acordo com o 'path':
+  'Landing Page' if ('/macncheese/' in cur['ga:landingPagePath'] 
+    or '/frios/' in cur['ga:landingPagePath'] 
+    or '/bio/' in cur['ga:landingPagePath'] 
+    or '/natal/' in cur['ga:landingPagePath'] 
+    or '/vegtal/' in cur['ga:landingPagePath'] 
+    or '/fds/' in cur['ga:landingPagePath'] 
+    or '/suinos/' in cur['ga:landingPagePath'] 
+    or '/livrelev/' in cur['ga:landingPagePath'] 
+    or '/speciale/' in cur['ga:landingPagePath'] 
+    or '/lektrek50anos/' in cur['ga:landingPagePath'] 
+    or '/congelados/' in cur['ga:landingPagePath'] 
+    or '/nba/' in cur['ga:landingPagePath'] 
+    or '/maes/' in cur['ga:landingPagePath'] 
+    or '/organico/' in cur['ga:landingPagePath'] 
+    or '/pratosprontos/' in cur['ga:landingPagePath'] 
+    or '/nossomelhorestadentro/' in cur['ga:landingPagePath'] 
+    or '/s-para-voce/' in cur['ga:landingPagePath'] 
+    or '/nabrasa/calculadora' in cur['ga:landingPagePath'] 
+    or '/portaldagenerosidade/' in cur['ga:landingPagePath'] 
+    or '/chester/' in cur['ga:landingPagePath'] 
+    or '/sampadoca/' in cur['ga:landingPagePath'] 
+    or '/saodogao/' in cur['ga:landingPagePath'] 
+    or '/tanamao/' in cur['ga:landingPagePath'] 
+    or '/tradutor/' in cur['ga:landingPagePath'] 
+    or '/reusequaly/' in cur['ga:landingPagePath'] 
+    or '/zerolactose/' in cur['ga:landingPagePath'] 
+    or '/espalhando-o-que-e-bom/' in cur['ga:landingPagePath'] 
+    or '/zero-gordura-trans/' in cur['ga:landingPagePath'] 
+    or '/lollabr/' in cur['ga:landingPagePath'] 
+    or '/profissionais-da-saude/' in cur['ga:landingPagePath'] 
+    or '/nabrasa/' in cur['ga:landingPagePath']) and not cur['ga:landingPagePath'].startswith('/produtos/') 
+   else 'Páginas de Receita' if cur['ga:landingPagePath'].startswith('/receitas/') 
+   else 'Páginas de Produto' if cur['ga:landingPagePath'].startswith('/produtos') 
+    or '/familia-claybom' in cur['ga:landingPagePath'] 
+    or '/produto/' in cur['ga:landingPagePath'] 
+   else 'Outro'
+Código completo para o Adverity:
+  'Landing Page' if ('/macncheese/' in cur['ga:landingPagePath'] or '/frios/' in cur['ga:landingPagePath'] or '/bio/' in cur['ga:landingPagePath'] or '/natal/' in cur['ga:landingPagePath'] or '/vegtal/' in cur['ga:landingPagePath'] or '/fds/' in cur['ga:landingPagePath'] or '/suinos/' in cur['ga:landingPagePath'] or '/livrelev/' in cur['ga:landingPagePath'] or '/speciale/' in cur['ga:landingPagePath'] or '/lektrek50anos/' in cur['ga:landingPagePath'] or '/congelados/' in cur['ga:landingPagePath'] or '/nba/' in cur['ga:landingPagePath'] or '/maes/' in cur['ga:landingPagePath'] or '/organico/' in cur['ga:landingPagePath'] or '/pratosprontos/' in cur['ga:landingPagePath'] or '/nossomelhorestadentro/' in cur['ga:landingPagePath'] or '/s-para-voce/' in cur['ga:landingPagePath'] or '/nabrasa/calculadora' in cur['ga:landingPagePath'] or '/portaldagenerosidade/' in cur['ga:landingPagePath'] or '/chester/' in cur['ga:landingPagePath'] or '/sampadoca/' in cur['ga:landingPagePath'] or '/saodogao/' in cur['ga:landingPagePath'] or '/tanamao/' in cur['ga:landingPagePath'] or '/tradutor/' in cur['ga:landingPagePath'] or '/reusequaly/' in cur['ga:landingPagePath'] or '/zerolactose/' in cur['ga:landingPagePath'] or '/espalhando-o-que-e-bom/' in cur['ga:landingPagePath'] or '/zero-gordura-trans/' in cur['ga:landingPagePath'] or '/lollabr/' in cur['ga:landingPagePath'] or '/profissionais-da-saude/' in cur['ga:landingPagePath'] or '/nabrasa/' in cur['ga:landingPagePath']) and not cur['ga:landingPagePath'].startswith('/produtos/') else 'Páginas de Receita' if cur['ga:landingPagePath'].startswith('/receitas/') else 'Páginas de Produto' if cur['ga:landingPagePath'].startswith('/produtos') or '/familia-claybom' in cur['ga:landingPagePath'] or '/produto/' in cur['ga:landingPagePath'] else 'Outro'
